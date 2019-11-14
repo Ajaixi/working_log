@@ -127,4 +127,6 @@ BOOTSTRAP3 = {
     'include_jquery': True
 }
 
-STATICFILES_DIRS = ( os.path.join('static'), )
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, 'static'), )
