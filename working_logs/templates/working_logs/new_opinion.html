@@ -1,0 +1,23 @@
+{% extends "working_logs/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2><a href="{% url 'working_logs:project' project.id %}">{{project}}</a></h2>
+{% endblock header %}
+<head>
+    {{form.media}}
+</head>
+
+{% block content %}
+  <p>
+    Add a new opinion:
+  </p>
+      <form action="{% url 'working_logs:new_opinion' project.id %}" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button name="submit" class="btn btn-primary">add opinion</button>
+        {% endbuttons %}
+      </form>
+  
+{% endblock content %}

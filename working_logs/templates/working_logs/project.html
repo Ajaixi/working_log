@@ -1,0 +1,30 @@
+{% extends 'working_logs/base.html' %}
+
+{% block header %}
+  <h4>工程项目:{{project}}</h4>
+  <h4>添加日期:{{project.date_added}}-{{project.time_added}}</h4>
+  
+{% endblock header %}
+
+{% block content %}
+  <p>
+    <a href="{% url 'working_logs:new_opinion' project.id %}">add new opinion</a>
+  </p>
+
+  {% for opinion in opinions %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <p>{{opinion.text|linebreaks}}</p>
+          <p>{{opinion.date_added}}-{{opinion.time_added}}</p>
+          <p>
+              <a href="{% url 'working_logs:edit_opinion' opinion.id %}">edit opinion</a>-
+              <a href="{% url 'working_logs:delete_opinion' opinion.id %}">delete opinion</a>
+          </p>
+    
+      </div>
+    </div>
+  {% empty %}
+    还没有意见被添加！
+  {% endfor %}
+  </ul>
+{% endblock content %}

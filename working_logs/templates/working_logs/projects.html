@@ -1,0 +1,22 @@
+{% extends "working_logs/base.html" %}
+
+{% block header %}
+  <h2>Projects</h2>
+{% endblock header %}
+
+{% block content %}
+
+  <ul>
+    {% for project in projects %}
+      <li>      
+          <a href="{% url 'working_logs:project' project.id %}">{{project}}</a>
+          ------<small> <a href="{% url 'working_logs:delete_project' project.id%}">delete</a></small>   
+      </li>
+    {% empty %}
+      <li>还没有项目被添加</li>
+    {% endfor %}
+  </ul>
+    
+    <h4><a href="{% url 'working_logs:new_project' %}">Add a new project</a></h4>
+
+  {% endblock content %}

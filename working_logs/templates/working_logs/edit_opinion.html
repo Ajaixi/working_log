@@ -1,0 +1,12 @@
+{% extends "working_logs/base.html" %}
+<head>{{form.media}}</head>
+{% block content %}
+  <p><a href="{% url 'working_logs:project' project.id %}">{{project}}</a></p>
+
+  <p>Edit opinion</p>
+    <form action="{% url 'working_logs:edit_opinion' opinion.id %}" method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+        <button name="submit">save changes</button>
+    </form>
+{% endblock content%}

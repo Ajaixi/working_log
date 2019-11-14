@@ -1,0 +1,46 @@
+{% load bootstrap3 %}
+<html lang="ch">
+  <head>
+    <meta charset='utf-8'>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>working Log</title>
+      {% bootstrap_css %}
+      {% bootstrap_javascript %}
+  </head>
+  <body>
+    <!-- Static navbar -->
+      <nav class="navbar navbar_default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar"></button>
+            <a class="navbar-brand" href="{% url 'working_logs:index' %}">Working Log</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'working_logs:projects' %}">Projects</a></li>
+          </ul>
+        </div>
+      </div>
+      </nav>
+      <div class="container">
+        <div>
+          <form action="{% url 'working_logs:search' %}" method="post">
+              {% csrf_token %}
+              <p style="font-size:20px">项目查询：</p>                     
+              <p>
+                项目编号：<input type="text" name="project" />
+                            <button name='submit'>Search</button>
+              </p>
+            </form>
+              
+        </div>
+        <div class="page-header">
+          {% block header %}{% endblock header %}
+        </div>
+        <div>
+          {% block content %}{% endblock content %}
+        </div>
+      </div>
+</body>
