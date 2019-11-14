@@ -126,3 +126,5 @@ STATIC_URL = '/static/'
 BOOTSTRAP3 = {
     'include_jquery': True
 }
+
+STATICFILES_DIRS = ( os.path.join('static'), )
