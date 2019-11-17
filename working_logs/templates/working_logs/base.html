@@ -18,7 +18,7 @@
               <a class="nav-link" href="{% url 'working_logs:projects' %}">Projects</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-md-0" action="{% url 'working_logs:search' %}" method="post">
+          <form class="form-inline my-2 mx-6 my-md-0" action="{% url 'working_logs:search' %}" method="post">
             {% csrf_token %}
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="project">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">查询项目</button>
