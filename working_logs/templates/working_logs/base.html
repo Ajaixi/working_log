@@ -10,32 +10,29 @@
   </head>
   <body>
     <!-- Static navbar -->
-      <nav class="navbar navbar_default navbar-static-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
       
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-            aria-expanded="false" aria-controls="navbar"></button>
-            <a class="navbar-brand" href="{% url 'working_logs:index' %}">Working Log</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a href="{% url 'working_logs:projects' %}">Projects</a></li>
+            <li class="nav-item active">
+              <a class="nav-link" href=="{% url 'working_logs:index' %}">Working Log <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'working_logs:projects' %}">Projects</a>
+            </li>
           </ul>
+          <form class="form-inline my-2 my-lg-0" action="{% url 'working_logs:search' %}" method="post">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="project">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </div>
-     
       </nav>
       <div class="container">
-        <div>
-          <form action="{% url 'working_logs:search' %}" method="post">
-              {% csrf_token %}
-              <p style="font-size:20px">项目查询：</p>                     
-              <p>
-                项目编号：<input type="text" name="project" />
-                            <button name='submit'>Search</button>
-              </p>
-            </form>
-              
-        </div>
         <div class="page-header">
           {% block header %}{% endblock header %}
         </div>
