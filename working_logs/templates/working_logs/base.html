@@ -13,15 +13,15 @@
         <a class="navbar-brand" href="{% url 'working_logs:index' %}">Working Log</a>
        
         <div id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto mt-1">
+          <ul class="navbar-nav mr-auto my-2">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'working_logs:projects' %}">Projects</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0" action="{% url 'working_logs:search' %}" method="post">
+          <form class="form-inline my-2 my-md-0" action="{% url 'working_logs:search' %}" method="post">
             {% csrf_token %}
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="project">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">查询项目</button>
           </form>
         </div>
       </nav>
