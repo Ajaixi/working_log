@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'working_logs',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +118,7 @@ USE_TZ = False
 
 DATE_FORMAT = 'Y m d'
 
+LOGIN_URL = '/users/login/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
