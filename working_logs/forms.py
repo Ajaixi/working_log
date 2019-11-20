@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Opinion
+from .models import Project, Opinion, Img
 from django.forms import SelectDateWidget
 from datetime import datetime
 
@@ -28,4 +28,12 @@ class OpinionForm(forms.ModelForm):
         widgets = {'date_added': SelectDateWidget(years=YEARS, months=MONTHS),
          'text': forms.Textarea(attrs={'cols': 80})
         }
+
+class ImgForm(forms.ModelForm):
+    class Meta:
+        model = Img
+        fields = ['img_url']
+        labels = {'img_url':''}
+        widgets = {'img_url':forms.ClearableFileInput(attrs={'multiple': True})}
+
 

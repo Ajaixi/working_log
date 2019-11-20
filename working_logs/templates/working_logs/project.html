@@ -10,8 +10,10 @@
   <p>
     <a href="{% url 'working_logs:new_opinion' project.id %}">add new opinion</a>
   </p>
+  
 
   {% for opinion in opinions %}
+  <ul>
     <div class="panel panel-default">
       <div class="panel-heading">
           <p>{{opinion.text|linebreaks}}</p>
@@ -27,4 +29,16 @@
     还没有意见被添加！
   {% endfor %}
   </ul>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p><a href="{% url 'working_logs:add_img' project.id %}">添加图片</a></p>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p><a href="{% url 'working_logs:show_img' project.id %}">查看图片</a></p>
+    </div>
+  </div>
+  
 {% endblock content %}

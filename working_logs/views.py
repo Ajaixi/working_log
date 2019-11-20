@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Project, Opinion
-from .forms import ProjectForm, OpinionForm
+from .models import Project, Opinion, Img
+from .forms import ProjectForm, OpinionForm, ImgForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -97,4 +97,66 @@ def search(request):
        
         return HttpResponseRedirect(reverse('working_logs:project', args=[project.id]))
 
+
+def img_upload(request, project_id):
+    """
+    图片上传
+    """
+    project = Project.objects.get(id=project_id)
+    if request.method != "POST":
+        form = ImgForm()
+    else:
+        files = request.FILES.getlist('img_url')
+        if len(files) == 0:
+            return HttpResponseRedirect(reverse('working_logs:add_img', args=[project.id]))
+        for i in range(len(files)):
+            form = ImgForm(request.POST or None, {'img_url':files[i]} or None)
+            if form.is_valid():
+                new_img = form.save(commit=False)
+                new_img.project = project
+                print(new_img.img_url.url)
+                new_img.save()           
+                
+        return HttpResponseRedirect(reverse('working_logs:show_img', args=[project.id]))  
         
+    context = {'project': project, 'form': form}
+    return render(request, 'working_logs/img_upload.html', context)
+
+
+def img_show(request, project_id):
+    """
+    图片显示
+    """
+    project = Project.objects.get(id=project_id)
+    imgs = project.img_set.order_by('date_added')
+    context = {'project':project, 'imgs':imgs}
+    return render(request, 'working_logs/img_show.html', context)
+  
+
+def delete_img(request, img_id):
+    img = Img.objects.get(id=img_id)
+    project = img.project
+    img.delete()
+    return HttpResponseRedirect(reverse('working_logs:show_img', args=[project.id]))
+
+'''
+def img_upload(request, project_id):
+    project = Project.objects.get(id=project_id)
+    if request.method == 'POST':
+        files = request.FILES.getlist('img')
+        print(request.FILES)
+        print(files)
+        
+        for f in files:
+            print(type(f))
+            form = ImgForm(request.POST or None, f or None)
+            if form.is_valid():
+                new_img = form.save(commit=False)
+                new_img.project = project    
+                if new_img.img_url:
+                    new_img.save()
+                else:
+                    return HttpResponseRedirect(reverse('working_logs:add_img', args=[project.id]))
+        return HttpResponseRedirect(reverse('working_logs:show_img', args=[project.id]))
+    context = {'project': project}
+    return render(request, 'working_logs/img_upload.html', context)'''

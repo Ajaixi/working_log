@@ -23,3 +23,17 @@ class Opinion(models.Model):
 
     def __str__(self):
         return self.text[:50] + '...'
+
+
+class Img(models.Model):
+    """添加图片"""
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    img_url = models.FileField(upload_to='photos/',blank=True,null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+    #name = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name_plural = 'Imgs'
+    
+    def __str__(self):
+        return str(self.date_added)
