@@ -12,7 +12,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
     {% for img in imgs %}
-      <p><img width="400" height="500" src="{{ img.img_url.url }}">
+      <p><img class="img-responsive" alt="响应式图像" src="{{ img.img_url.url }}">
         &ensp; &ensp; &ensp; &ensp; &ensp; <a style=" color:rgb(219, 27, 27); font-size:20px;" href="{% url 'working_logs:delete_img' img.id%}">delete</a></p>
       
     {% empty %}
