@@ -37,3 +37,9 @@ class ImgForm(forms.ModelForm):
         widgets = {'img_url':forms.ClearableFileInput(attrs={'multiple': True})}
 
 
+class ReviewForm(forms.Form):
+    APPROVAL_CHOICES = (
+        ('approve', 'Approve this project'),
+        ('pending', 'Pending this project'),
+    )
+    approval = forms.ChoiceField(choices=APPROVAL_CHOICES, widget=forms.RadioSelect)

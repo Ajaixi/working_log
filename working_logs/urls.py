@@ -6,8 +6,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
-    re_path(r'projects/', views.projects, name='projects'),
-    re_path(r'^project/(?P<project_id>\d+)/$', views.project, name = 'project'),
+    re_path(r'projects/(?P<pindex>\d*)/$', views.projects, name='projects'),
+    re_path(r'results/(?P<projects_name>\w*)/(?P<pindex>\d+)/$', views.results, name='results'),
+    re_path(r'^project/(?P<project_id>\d+)/$', views.project, name ='project'),
+    re_path(r'^review/(?P<project_id>\d+)/$', views.review, name ='review'),
     re_path(r'^new_project/$', views.new_project, name = 'new_project'),
     re_path(r'^new_opinion/(?P<project_id>\d+)/$', views.new_opinion, name='new_opinion'),
     re_path(r'^edit_opinion/(?P<opinion_id>\d+)/$', views.edit_opinion, name='edit_opinion'),

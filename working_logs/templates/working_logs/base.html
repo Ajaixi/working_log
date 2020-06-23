@@ -1,7 +1,7 @@
 {% load bootstrap3 %}
 <html lang="ch">
   <head>
-    <meta charset='utf-8'>
+      <meta charset='utf-8'>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>working Log</title>
@@ -27,7 +27,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url 'working_logs:projects' %}">Projects <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{% url 'working_logs:projects' '1' %}">Projects <span class="sr-only">(current)</span></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
@@ -37,9 +37,10 @@
               <li><a href="{%url 'users:login' %}">log in</a></li>
             {% endif %}
           </ul>
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" class="form" action="{% url 'working_logs:index' %}" method="POST">
+            {% csrf_token%}
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search" name="project">
+              <input type="text" class="form-control" placeholder="Search" name="project_name">
             </div>
             <button type="submit" class="btn btn-default">项目查询</button>
           </form>

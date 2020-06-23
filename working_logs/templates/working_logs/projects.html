@@ -5,13 +5,62 @@
 {% endblock header %}
 
 {% block content %}
+  <p> 
+    <script language="javascript"> 
+      function delcfm() { 
+          if (!confirm("确认要删除？")) { 
+              window.event.returnValue = false; 
+          } 
+      } 
+    </script>
+  </p> 
+
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      筛选 <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="{% url 'working_logs:results' 'reviewed' 1 %}">已审阅</a></li>
+      <li><a href="{% url 'working_logs:results' 'pending' 1 %}">处理中</a></li>
+    </ul>
+  </div>
+
 
   <ul>
-    {% for project in projects %}
-      <li>      
-          <a href="{% url 'working_logs:project' project.id %}">{{project}}</a>
-          ------<small> <a href="{% url 'working_logs:delete_project' project.id%}">delete</a></small>   
-      </li>
+    {% for project in page %}
+      
+          <div class="container">
+            <div class="row">
+              <tr class="success">
+              <div class="col-md-4">
+              {% if project.state == "reviewed" %}
+                <div class="list-group">
+                  <a href="{% url 'working_logs:project' project.id %}" class="list-group-item list-group-item-success">
+                  <h5 class="list-group-item-heading">{{project}}</h5>
+                  <small><p class="list-group-item-text">{{project.date_added}}</p></small>
+                  </a>
+                </div>
+              {% else %}
+                <div class="list-group">
+                  <a href="{% url 'working_logs:project' project.id %}" class="list-group-item">
+                  <h5 class="list-group-item-heading">{{project}}</h5>
+                  <small><p class="list-group-item-text">{{project.date_added}}</p></small>
+                  </a>
+                </div>
+              {% endif %}
+              </div>
+              </tr>
+            
+              <div class="col-md-1 col-md-offset-1">
+                <button type="button" class="btn btn-default"><a onclick=delcfm() href="{% url 'working_logs:delete_project' project.id%}">删除</a></button>   
+              </div>
+
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default"><a href="{% url 'working_logs:review' project.id%}">审查</a></button>   
+              </div>
+
+            </div>            
+          </div>
     {% empty %}
       <li>还没有项目被添加</li>
     {% endfor %}
@@ -19,4 +68,32 @@
     
     <h4><a href="{% url 'working_logs:new_project' %}">Add a new project</a></h4>
 
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      {% if page.has_previous %}
+          <li>
+            <a href="{% url 'working_logs:projects' page.previous_page_number %}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+      {% endif %}
+
+      {% for num in page.paginator.page_range %}
+          {% if num == page.number %}
+            <li class='active'><a href="#">{{num}}</a></li>
+          {% else %}
+            <li><a href="{% url 'working_logs:projects' num %}">{{num}}</a></li>
+          {% endif %}
+      {% endfor %}
+
+      {% if page.has_next %}
+          <li>
+            <a href="{% url 'working_logs:projects' page.next_page_number %}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+      {% endif %}
+    </ul>
+  </nav>
   {% endblock content %}

@@ -30,15 +30,31 @@
   {% endfor %}
   </ul>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <p><a href="{% url 'working_logs:add_img' project.id %}">添加图片</a></p>
-    </div>
-  </div>
+  <br>
+
+ 
+  {% if img_exist %}
   <div class="panel panel-default">
     <div class="panel-heading">
       <p><a href="{% url 'working_logs:show_img' project.id %}">查看图片</a></p>
     </div>
   </div>
+  {% elif not img_exist %}
+    还没有图片被添加！
+  {% endif %}
+    
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p><a href="{% url 'working_logs:add_img' project.id %}">添加图片</a></p>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>项目状态：{{project.state}}</h4>
+      <p><a href="{% url 'working_logs:review' project.id %}">审查</a></p>
+    </div>
+  </div>
+  
   
 {% endblock content %}

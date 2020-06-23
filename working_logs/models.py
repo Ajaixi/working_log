@@ -6,9 +6,17 @@ class Project(models.Model):
     text = models.CharField(max_length=200)
     date_added  = models.DateField()
     time_added = models.TimeField(auto_now_add=True)
+    STATE_CHOICES = (
+        ('pending', 'pending'),
+        ('reviewed', 'reviewed'),
+    )
+    state = models.CharField(max_length=15, choices=STATE_CHOICES, default='pending')
 
     def __str__(self):
         return self.text
+    
+    class Meta:
+        permissions = (("can_approve_or_reject_project", "Can approve or reject project"),)
 
 
 class Opinion(models.Model):
@@ -37,3 +45,5 @@ class Img(models.Model):
     
     def __str__(self):
         return str(self.date_added)
+
+
