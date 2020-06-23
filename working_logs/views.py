@@ -22,7 +22,7 @@ def index(request):
 @login_required 
 def results(request, projects_name, pindex):
     if projects_name != '':
-        if projects_name == 'reviewed' or 'pending':
+        if projects_name in ('reviewed', 'pending'):
             projects = Project.objects.filter(state=projects_name)
         else:
             projects = Project.objects.filter(text__contains=projects_name)
