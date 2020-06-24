@@ -14,15 +14,18 @@
       } 
     </script>
   </p> 
-
-  <div class="btn-group pull-right">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      筛选 <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a href="{% url 'working_logs:results' 'reviewed' 1 %}">已审阅</a></li>
-      <li><a href="{% url 'working_logs:results' 'pending' 1 %}">处理中</a></li>
-    </ul>
+    <div class="container">
+    <div class="btn-group pull-right row">
+      <div class="col-xs-4 col-md-4">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          筛选 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'working_logs:results' 'reviewed' 1 %}">已审阅</a></li>
+          <li><a href="{% url 'working_logs:results' 'pending' 1 %}">处理中</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
 
@@ -32,7 +35,7 @@
           <div class="container">
             <div class="row">
               <tr class="success">
-              <div class="col-md-4">
+              <div class="col-md-4 col-xs-4">
               {% if project.state == "reviewed" %}
                 <div class="list-group">
                   <a href="{% url 'working_logs:project' project.id %}" class="list-group-item list-group-item-success">
@@ -51,11 +54,11 @@
               </div>
               </tr>
             
-              <div class="col-md-1 col-md-offset-1">
+              <div class="col-md-1 col-md-offset-1 col-xs-1">
                 <button type="button" class="btn btn-default"><a onclick=delcfm() href="{% url 'working_logs:delete_project' project.id%}">删除</a></button>   
               </div>
 
-              <div class="col-md-1">
+              <div class="col-md-1 col-xs-1">
                 <button type="button" class="btn btn-default"><a href="{% url 'working_logs:review' project.id%}">审查</a></button>   
               </div>
 
