@@ -35,7 +35,7 @@
           <div class="container">
             <div class="row">
               <tr class="success">
-              <div class="col-md-4 col-xs-4">
+              <div class="col-md-4 col-xs-6">
               {% if project.state == "reviewed" %}
                 <div class="list-group">
                   <a href="{% url 'working_logs:project' project.id %}" class="list-group-item list-group-item-success">
@@ -54,11 +54,11 @@
               </div>
               </tr>
             
-              <div class="col-md-1 col-md-offset-1 col-xs-1">
+              <div class="col-md-2 col-md-offset-1 col-xs-2">
                 <button type="button" class="btn btn-default"><a onclick=delcfm() href="{% url 'working_logs:delete_project' project.id%}">删除</a></button>   
               </div>
 
-              <div class="col-md-1 col-xs-1">
+              <div class="col-md-2 col-xs-2">
                 <button type="button" class="btn btn-default"><a href="{% url 'working_logs:review' project.id%}">审查</a></button>   
               </div>
 
